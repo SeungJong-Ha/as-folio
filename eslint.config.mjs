@@ -23,6 +23,7 @@ const sharedRules = {
   'unused-imports/no-unused-imports': 'error',
   'unused-imports/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
   '@typescript-eslint/no-explicit-any': 'off',
+  '@typescript-eslint/no-deprecated': 'error',
 };
 
 export default tseslint.config(
@@ -84,6 +85,8 @@ export default tseslint.config(
     rules: {
       ...sharedRules,
       '@typescript-eslint/consistent-type-imports': 'off',
+      // Type-aware, so `disableTypeChecked` already turns it off — undo the sharedRules override.
+      '@typescript-eslint/no-deprecated': 'off',
     },
   },
 
@@ -113,6 +116,13 @@ export default tseslint.config(
       globals: { Astro: 'readonly' },
     },
     rules: sharedRules,
+  },
+
+  // The calendar iframe keeps `frameborder`/`scrolling`: the CSS replacement only hides
+  // iframe scrollbars in Firefox, so dropping them regresses Chrome and Safari.
+  {
+    files: ['src/components/teaching/CalendarEmbed.astro'],
+    rules: { '@typescript-eslint/no-deprecated': 'off' },
   },
 
   // Files that Prettier's Astro plugin cannot parse (inline scripts with object literals,
