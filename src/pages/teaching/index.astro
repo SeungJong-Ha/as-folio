@@ -1,4 +1,5 @@
 ---
+import CalendarEmbed from '@components/teaching/CalendarEmbed.astro';
 import { site } from '@config/site';
 import Page from '@layouts/Page.astro';
 import { getCollection, render } from 'astro:content';
@@ -59,14 +60,7 @@ const timezone = site.teaching.timezone;
               Show Calendar
             </button>
             <div id="calendar-container" style="display: none;">
-              <iframe
-                id="calendar-iframe"
-                data-calendar-id={calendarId}
-                data-timezone={timezone}
-                style="border: 0; width: 100%; height: 600px;"
-                frameborder="0"
-                scrolling="no"
-              />
+              <CalendarEmbed calendarId={calendarId} timezone={timezone} />
             </div>
           </div>
         )

@@ -1,0 +1,25 @@
+---
+// Google Calendar embed.
+//
+// Kept in its own component because it needs `frameborder` / `scrolling`: both are obsolete
+// in the HTML spec, but the CSS replacement for `scrolling` (`overflow: hidden`) only hides
+// iframe scrollbars in Firefox — Chrome and Safari still honour the attribute, so dropping it
+// regresses the embed. Isolating them here keeps the `@typescript-eslint/no-deprecated`
+// exemption in eslint.config.mjs scoped to this file instead of the whole teaching page.
+//
+// The toggle script lives in the teaching page and finds this iframe by id.
+interface Props {
+  calendarId: string;
+  timezone: string;
+}
+
+const { calendarId, timezone } = Astro.props;
+---
+
+<iframe
+  id="calendar-iframe"
+  data-calendar-id={calendarId}
+  data-timezone={timezone}
+  style="border: 0; width: 100%; height: 600px;"
+  frameborder="0"
+  scrolling="no"></iframe>
