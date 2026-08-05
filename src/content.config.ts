@@ -1,5 +1,6 @@
 import { glob } from 'astro/loaders';
-import { defineCollection, z } from 'astro:content';
+import { z } from 'astro/zod';
+import { defineCollection } from 'astro:content';
 
 // ─── Posts ─────────────────────────────────────────────────────────────────
 
@@ -28,7 +29,7 @@ const posts = defineCollection({
     /** Last modified date — displayed in the post header and used in JSON-LD dateModified. */
     lastmod: z.coerce.date().optional(),
     /** Redirect to external URL instead of rendering content. */
-    redirect: z.string().url().optional(),
+    redirect: z.url().optional(),
     /** Hero/thumbnail image path. */
     image: z.string().optional(),
     /** Distill layout — renders as a Distill article. */
@@ -38,7 +39,7 @@ const posts = defineCollection({
       .array(
         z.object({
           name: z.string(),
-          url: z.string().url().optional(),
+          url: z.url().optional(),
           affiliations: z.object({ name: z.string() }).optional(),
         }),
       )
@@ -88,7 +89,7 @@ const projects = defineCollection({
     /** Alt text for image. */
     img_alt: z.string().optional(),
     /** External URL (e.g. GitHub repo). */
-    url: z.string().url().optional(),
+    url: z.url().optional(),
     /** GitHub repo in format owner/repo — auto-links to repo. */
     github: z.string().optional(),
     /** GitHub repo path (owner/repo) for fetching live star count. */
@@ -98,7 +99,7 @@ const projects = defineCollection({
     /** Badge label shown on card (e.g. 'open source'). */
     category: z.string().optional(),
     /** Show redirect to external url instead of project page. */
-    redirect: z.string().url().optional(),
+    redirect: z.url().optional(),
     /** Citation keys from papers.bib to show as References at the bottom of the project page. */
     related_publications: z.array(z.string()).optional(),
     /** Enable Giscus comments on the project page. */
@@ -118,7 +119,7 @@ const people = defineCollection({
     /** Brief description shown on profile card. */
     description: z.string().optional(),
     /** Personal website. */
-    website: z.string().url().optional(),
+    website: z.url().optional(),
     /** GitHub username. */
     github: z.string().optional(),
     /** Google Scholar user ID. */
@@ -146,7 +147,7 @@ const teaching = defineCollection({
     /** Institution. */
     institution: z.string().optional(),
     /** Course URL or syllabus. */
-    url: z.string().url().optional(),
+    url: z.url().optional(),
     /** Sort order. */
     importance: z.number().optional().default(999),
     /** 'current' | 'past' */
@@ -193,7 +194,7 @@ const books = defineCollection({
     /** Original publication year */
     released: z.number().optional(),
     /** Link to buy the book */
-    buy_link: z.string().url().optional(),
+    buy_link: z.url().optional(),
     /** Goodreads review ID */
     goodreads_review: z.string().optional(),
     /** Comma-separated categories/genres */
