@@ -1,7 +1,7 @@
 {
   "name": "as-folio",
   "description": "A clean, responsive Astro theme for academics and researchers",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "author": "Dadang NH <hello@dadangnh.com>",
   "homepage": "https://github.com/dadangnh/as-folio",
   "repository": {
@@ -42,7 +42,7 @@
     "LICENSE"
   ],
   "peerDependencies": {
-    "astro": ">=6.0.0"
+    "astro": ">=6.4.0"
   },
   "scripts": {
     "dev": "astro dev",
@@ -67,6 +67,7 @@
     "citations:update": "node --strip-types scripts/update-citations.ts"
   },
   "dependencies": {
+    "@astrojs/markdown-remark": "7.2.0",
     "@astrojs/mdx": "^6.0.0",
     "@astrojs/partytown": "^2.1.7",
     "@astrojs/react": "^5.0.7",
